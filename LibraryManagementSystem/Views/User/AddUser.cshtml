@@ -1,0 +1,85 @@
+﻿@model LibraryManagementSystem.Models.TblUser1
+@{
+    ViewBag.Title = "AddUser";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Add New User</h2>
+@using (Html.BeginForm("InsertUpdate", "User", FormMethod.Post))
+{
+    <table>
+        <tr>
+            @Html.HiddenFor(Model => Model.UserId)
+            <td>@Html.LabelFor(Model => Model.Name)</td>
+            <td>@Html.TextBoxFor(Model => Model.Name)</td>
+        </tr>
+
+        <tr>
+            <td>@Html.LabelFor(Model => Model.Email)</td>
+            <td>@Html.TextBoxFor(Model => Model.Email)</td>
+        </tr>
+
+        <tr>
+            <td>@Html.LabelFor(Model => Model.Country)</td>
+            <td>@Html.DropDownListFor(Model => Model.Country, new SelectList(Model.LstCountry, "CountryId", "CountryName"), "Choose Country", new { @onchange = "GetState()" })</td>
+        </tr>
+
+        <tr>
+            <td>@Html.LabelFor(Model => Model.State)</td>
+            <td>@Html.DropDownListFor(Model => Model.State, new SelectList(Model.LstState, "StateId", "StateName"), "Choose State")</td>
+        </tr>
+
+        <tr>
+            <td>@Html.LabelFor(Model => Model.Gender, "Gender")</td>
+            <td>
+                @for (int i = 0; i < Model.LstGender.Count; i++)
+                {
+                    @Html.RadioButtonFor(Model => Model.Gender, Model.LstGender[i].GenderId) @Model.LstGender[i].GenderName
+                }
+            </td>
+        </tr>
+
+        <tr>
+            <td>@Html.LabelFor(Model => Model.Pass)</td>
+            <td>@Html.TextBoxFor(Model => Model.Pass)</td>
+        </tr>
+
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Submit" name="Submit" /></td>
+        </tr>
+
+    </table>
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#State").empty().append($('<option></option>').html("Choose State").val("0"));
+        $("#State").prop("disabled", true);
+    });
+
+    function GetState() {
+        if ($("#Country").val() === '') {
+            $("#State").empty().append($('<option></option>').html("Choose State").val("0"));
+            $("#State").prop("disabled", true);
+        }
+        else {
+            $.ajax({
+                url: '../User/FetchState',
+                type: 'post',
+                data: { cid: $("#Country").val() },
+                success: function (data) {
+                    $("#State").prop("disabled", false);
+                    $("#State").empty().append($('<option></option>').html("Choose State").val("0"))
+                    data.forEach(function (item) {
+                        $("#State").append($('<option></option>').html(item.StateName).val(item.StateId));
+                    });
+                },
+                error: function () {
+                    alert("State data not found!!");
+                }
+            });
+        }
+    }
+</script>
+
