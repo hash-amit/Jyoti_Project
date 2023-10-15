@@ -16,8 +16,8 @@ namespace LibraryManagementSystem.Models
         public List<TblState> LstState { get; set; }
         public int Gender { get; set; }
         public List<TblGender> LstGender { get; set; }
-        public int Hobby { get; set; }
-        public List<TblHobby> LstHobby { get; set; }
+        public string Hobby { get; set; }
+        public List<TblHobby1> LstHobby { get; set; }
         public string Pass { get; set; }
     }
 }

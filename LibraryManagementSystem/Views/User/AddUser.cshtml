@@ -16,7 +16,14 @@
 
         <tr>
             <td>@Html.LabelFor(Model => Model.Email)</td>
-            <td>@Html.TextBoxFor(Model => Model.Email)</td>
+            @if (Model.UserId > 0)
+            {
+                <td>@Html.TextBoxFor(Model => Model.Email, new { @readonly = "readonly" })</td>
+            }
+            else
+            {
+                <td>@Html.TextBoxFor(Model => Model.Email)</td>
+            }
         </tr>
 
         <tr>
@@ -40,13 +47,25 @@
         </tr>
 
         <tr>
-            <td>@Html.LabelFor(Model => Model.Pass)</td>
+            <td>@Html.LabelFor(Model => Model.Hobby)</td>
+            <td>
+                @for (int i = 0; i < Model.LstHobby.Count; i++)
+                {
+                    @Html.CheckBoxFor(Model => Model.LstHobby[i].IsHobby)
+                    @Html.DisplayFor(Model => Model.LstHobby[i].HobbyName)
+                    @Html.HiddenFor(Model => Model.LstHobby[i].HobbyName)
+                }
+            </td>
+        </tr>
+
+        <tr>
+            <td>@Html.LabelFor(Model => Model.Pass, "Password")</td>
             <td>@Html.TextBoxFor(Model => Model.Pass)</td>
         </tr>
 
         <tr>
             <td></td>
-            <td><input type="submit" value="Submit" name="Submit" /></td>
+            <td><input type="submit" value="@ViewBag.btnName" name="Submit" /></td>
         </tr>
 
     </table>
@@ -54,8 +73,14 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        $("#State").empty().append($('<option></option>').html("Choose State").val("0"));
-        $("#State").prop("disabled", true);
+        let uid = @Model.UserId;
+        if (uid != "0") {
+            $("#State").prop("disabled", false);
+        }
+        else {
+            $("#State").empty().append($('<option></option>').html("Choose State").val("0"));
+            $("#State").prop("disabled", true);
+        }
     });
 
     function GetState() {
