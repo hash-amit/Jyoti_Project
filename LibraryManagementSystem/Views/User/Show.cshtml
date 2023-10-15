@@ -1,4 +1,4 @@
-﻿@model IEnumerable<LibraryManagementSystem.Models.TblUser>
+﻿@model IEnumerable<LibraryManagementSystem.Models.ShowUser>
 
 @{
     ViewBag.Title = "Show";
@@ -60,7 +60,7 @@
             @Html.DisplayFor(modelItem => item.Pass)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.UserId }) |
+            @Html.ActionLink("Edit", "EditProcess", new { id=item.UserId }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.UserId })
         </td>
     </tr>

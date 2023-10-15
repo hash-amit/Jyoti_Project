@@ -140,11 +140,17 @@
     <Compile Include="Migrations\202310112052099_mg2.designer.cs">
       <DependentUpon>202310112052099_mg2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202310151931220_ChangedDataOfHobby.cs" />
+    <Compile Include="Migrations\202310151931220_ChangedDataOfHobby.designer.cs">
+      <DependentUpon>202310151931220_ChangedDataOfHobby.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DatabaseContext.cs" />
+    <Compile Include="Models\ShowUser.cs" />
     <Compile Include="Models\TblCountry.cs" />
     <Compile Include="Models\TblGender.cs" />
     <Compile Include="Models\TblHobby.cs" />
+    <Compile Include="Models\TblHobby1.cs" />
     <Compile Include="Models\TblState.cs" />
     <Compile Include="Models\TblUser.cs" />
     <Compile Include="Models\TblUser1.cs" />
@@ -241,6 +247,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202310112052099_mg2.resx">
       <DependentUpon>202310112052099_mg2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202310151931220_ChangedDataOfHobby.resx">
+      <DependentUpon>202310151931220_ChangedDataOfHobby.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
